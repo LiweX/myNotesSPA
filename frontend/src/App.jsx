@@ -1,5 +1,12 @@
-import React from "react";
+import React, {Fragment} from 'react';
+import { Note } from './components/Note';
 
-export function App(){
-    return(<div>Hello React!!!</div>);
+export function App() {
+    return <Fragment>
+        <Note></Note>
+        <Note></Note>
+        <Note></Note>
+        <Note></Note>
+    </Fragment> 
+    
 }
