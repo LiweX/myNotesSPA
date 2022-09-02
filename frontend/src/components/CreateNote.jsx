@@ -3,9 +3,10 @@ import { Box } from '@mui/system'
 import { useState } from 'react'
 import React from 'react'
 
-export function CreateEditNote() {
+export function CreateNote({noteList,addNote,closeModal}) {
     
     const [inputTitle, setTitle] = useState("");
+    const [inputText, setText] = useState("");
     const [isEmpty, setEmptyState] = useState(true);
 
     const emptyChecker = e => {
@@ -14,7 +15,21 @@ export function CreateEditNote() {
         else setEmptyState(false);
         setTitle(e.target.value);
     }
-       
+    const textAreaChecker = e => {
+      //console.log(`you type ${e.target.value}`)
+      setText(e.target.value);
+  }
+  
+  const addNoteHandler = () =>{
+    closeModal();
+    addNote((prevNotes) => {
+      return [...prevNotes,{title:inputTitle,date:getActualDate()}]
+    })
+  }
+
+  function getActualDate(){
+    return new Date().toLocaleString();
+  }
     
   return (
     <Box sx={{border: 5, borderColor: 'black', backgroundColor: 'white' ,
@@ -23,8 +38,8 @@ export function CreateEditNote() {
         <Typography sx={{position:'relative', top:42,left:10}} variant='h6'>Title:</Typography>
         <TextField value={inputTitle} onChange={emptyChecker} sx={{position:'relative', top:5,left:100,border:1,borderRadius: 1, width:500, height:40}} size={"small"}></TextField>
         <Typography sx={{position:'relative', top:45,left:10}} variant='h6'>Content:</Typography>
-        <textarea style={{width:496,height:250,position:'relative',top:5,left:100,maxHeight:250,maxWidth:496,minHeight:250,minWidth:496}}></textarea>
-        <Button variant='contained' sx={{position:'relative',top:50,left:2}} disabled={isEmpty}>Accept</Button>
+        <textarea value={inputText} onChange={textAreaChecker} style={{width:496,height:250,position:'relative',top:5,left:100,maxHeight:250,maxWidth:496,minHeight:250,minWidth:496}}></textarea>
+        <Button onClick={addNoteHandler} variant='contained' sx={{position:'relative',top:50,left:2}} disabled={isEmpty}>Accept</Button>
         <Button variant='outlined'sx={{position:'relative',top:14,left:400}}>Cancel</Button>
         
     </Box>

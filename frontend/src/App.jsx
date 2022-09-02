@@ -1,11 +1,14 @@
 import { Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, {Fragment} from 'react';
-import { CreateEditNote } from './components/CreateEditNote';
+import React, {Fragment,useState} from 'react';
+import { CreateNote } from './components/CreateNote';
 import { Note } from './components/Note';
+import { NoteList } from './components/NoteList';
 
 export function App() {
-    const [open, setOpen] = React.useState(false);
+    const [notes,setNotes] = useState([{title:"TITULO",date:"FECHA"},]);
+
+    const [openCreateMenu, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -13,15 +16,12 @@ export function App() {
         <Typography variant='h2'>My Notes</Typography>
         <Box sx={{position:'relative',top:-40,left:300}}>
             <button onClick={handleOpen}>Create Note</button>
-            <Modal open={open} onClose={handleClose}><CreateEditNote></CreateEditNote></Modal>
+            <Modal open={openCreateMenu} onClose={handleClose}><CreateNote noteList={notes} addNote={setNotes} closeModal={handleClose}></CreateNote></Modal>
         </Box>
         <Box sx={{position:'relative',top:-61,left:400}}>
             <button >Archived Notes</button>
         </Box>
-        <Note></Note>
-        <Note></Note>
-        <Note></Note>
-        
+        <NoteList notes={notes}></NoteList>
     </Fragment> 
     
 }
