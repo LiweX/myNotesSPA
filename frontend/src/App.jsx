@@ -6,7 +6,7 @@ import { Note } from './components/Note';
 import { NoteList } from './components/NoteList';
 
 export function App() {
-    const [notes,setNotes] = useState([{title:"TITULO",date:"FECHA"},]);
+    const [notes,setNotes] = useState([{title:"TITULO",date:"FECHA",content:"holis"},]);
 
     const [openCreateMenu, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
