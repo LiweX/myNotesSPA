@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function DeleteNote({notes, noteID, delNote}) {
+export default function DeleteNote({noteID, delNote}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -19,14 +19,14 @@ export default function DeleteNote({notes, noteID, delNote}) {
 
   const deleteNoteHandler = () => {
     delNote((prevNotes) => {
-        return [...prevNotes].filter(note => note.id != noteID)
+        return [...prevNotes].filter(note => note.id !== noteID)
       })
     handleClose();
   }
 
   return (
     <React.Fragment>
-      <button onClick={handleClickOpen}><img src={process.env.PUBLIC_URL+"delete-77-512.png"} width="25" height={25} /></button>
+      <button onClick={handleClickOpen}><img alt='deleteIcon' src={process.env.PUBLIC_URL+"delete-77-512.png"} width="25" height={25} /></button>
       <Dialog
         open={open}
         onClose={handleClose}
