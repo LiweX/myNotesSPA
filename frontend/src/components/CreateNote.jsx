@@ -2,6 +2,7 @@ import { Button, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import React from 'react'
+import {v4 as uuidv4} from 'uuid';
 
 export function CreateNote({noteList,addNote,closeModal}) {
     
@@ -23,7 +24,7 @@ export function CreateNote({noteList,addNote,closeModal}) {
   const addNoteHandler = () =>{
     closeModal();
     addNote((prevNotes) => {
-      return [...prevNotes,{title:inputTitle,date:getActualDate(),content:inputText}]
+      return [...prevNotes,{id:uuidv4(),title:inputTitle,date:getActualDate(),content:inputText,}]
     })
   }
 

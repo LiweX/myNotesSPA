@@ -6,7 +6,7 @@ import { Note } from './components/Note';
 import { NoteList } from './components/NoteList';
 
 export function App() {
-    const [notes,setNotes] = useState([{title:"TITULO",date:"FECHA",content:"holis"},]);
+    const [notes,setNotes] = useState([]);
 
     const [openCreateMenu, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -21,7 +21,7 @@ export function App() {
         <Box sx={{position:'relative',top:-61,left:400}}>
             <button >Archived Notes</button>
         </Box>
-        <NoteList notes={notes}></NoteList>
+        <NoteList notes={notes} delNote={setNotes}></NoteList>
     </Fragment> 
     
 }
