@@ -6,14 +6,13 @@ import DeleteNote from './DeleteNote';
 import { ArchiveNote } from './ArchiveNote';
 import { Modal } from '@mui/material';
 
-export function Note({note,delNote,editNote,archiveNote}) {
+export function Note({note,delNote,editNote,archiveNote,archivedView}) {
     const {id,title,date,content} = note;
     const [noteTitle, setTitle] = useState(title);
     const [noteDate, setDate] = useState(date);
     const [noteContent, setContent] = useState(content);
     //const [noteID, setID] = useState(id);
     const [over, setBG] = useState(false);
-    
     const bgHandler = () => setBG((prev) => !prev);
 
     const [openCreateMenu, setOpen] = useState(false);
@@ -38,7 +37,7 @@ export function Note({note,delNote,editNote,archiveNote}) {
                 <Typography variant="h6" sx={{position:'relative',top:30,left:10}}>{noteDate}</Typography>
 
                 <Box sx={{position:'relative',top:-5,left:322}}>
-                    <ArchiveNote noteID={id} archiveNote={archiveNote}></ArchiveNote>
+                    <ArchiveNote noteID={id} archiveNote={archiveNote} archivedView={archivedView}></ArchiveNote>
                     <EditNote noteID={id} setTitle={setTitle} setContent={setContent} setDate={setDate} note={{noteTitle,noteDate,noteContent}} editNote={editNote}></EditNote>
                     <DeleteNote noteID={id} delNote={delNote}></DeleteNote>
                 </Box>      

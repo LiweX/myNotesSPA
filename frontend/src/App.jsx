@@ -6,17 +6,20 @@ import { NoteList } from './components/NoteList';
 
 export function App() {
     const [notes,setNotes] = useState([]);
-
+    const [archivedView, setView] = useState(false);
+    const viewHandler = () => {
+        setView(prev => !prev);
+    }
 
     return <Fragment>
-        <Typography variant='h2'>My Notes</Typography>
-        <Box sx={{position:'relative',top:-40,left:300}}>
-            <CreateNote addNote={setNotes}></CreateNote>
+        <Typography variant='h2'>{archivedView? "Archived Notes" : "My Notes"}</Typography>
+        <Box sx={{position:'relative',top:-40,left:400}}>
+            {archivedView? null : <CreateNote addNote={setNotes}></CreateNote>}
         </Box>
-        <Box sx={{position:'relative',top:-61,left:400}}>
-            <button >Archived Notes</button>
+        <Box sx={{position:'absolute',top:40,left:550}}>
+            <button onClick={viewHandler}>{archivedView? "Go back" : "Archived Notes"}</button>
         </Box>
-        <NoteList notes={notes} delNote={setNotes} editNote={setNotes} archiveNote={setNotes}></NoteList>
+        <NoteList notes={notes} delNote={setNotes} editNote={setNotes} archiveNote={setNotes} archivedView={archivedView}></NoteList>
     </Fragment> 
     
 }
