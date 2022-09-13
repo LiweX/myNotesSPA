@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { EditNote } from './EditNote';
 import DeleteNote from './DeleteNote';
 import { ArchiveNote } from './ArchiveNote';
+import { Modal } from '@mui/material';
 
 export function Note({note,delNote,editNote,archiveNote}) {
     const {id,title,date,content} = note;
@@ -14,14 +15,22 @@ export function Note({note,delNote,editNote,archiveNote}) {
     const [over, setBG] = useState(false);
     
     const bgHandler = () => setBG((prev) => !prev);
-    //const archiveHandler = () => setArchive(true);
-    //noteTitle = "Note Title";
-    //noteDate = "Last edit: 10/10/10 10:10pm";
+
+    const [openCreateMenu, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     
     return (
     <Fragment>
-        <Box onMouseOver={bgHandler} onMouseOut={bgHandler} 
+        <Modal open={openCreateMenu} onClose={handleClose}>
+        <Box sx={{border: 5, borderColor: 'black', backgroundColor: 'white' ,
+            borderRadius: 2,margin:4,width:620,height:500}}>
+                <Typography variant="h3" sx={{position:'relative',top:20,left:40}}>{noteTitle}</Typography>
+                <textarea value={noteContent} style={{width:496,height:250,position:'relative',top:80,left:50,maxHeight:250,maxWidth:496,minHeight:250,minWidth:496}}></textarea>
+            </Box>
+        </Modal>
+        <Box onClick={handleOpen} onMouseOver={bgHandler} onMouseOut={bgHandler} 
             sx={{border: 2, borderColor: 'black',bgcolor: over ? 'gray':'white', 
             borderRadius: 2,margin:4,maxWidth:450}}>
 
